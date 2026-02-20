@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. Redirect legacy .html pages to clean URLs (301 Permanent)
+  RewriteRule ^index\.html$ / [R=301,L]
+  RewriteRule ^portfolio\.html$ /portfolio [R=301,L]
+  RewriteRule ^about\.html$ /about [R=301,L]
+  RewriteRule ^contact\.html$ /contact [R=301,L]
+  RewriteRule ^services\.html$ / [R=301,L]
+
+  # 2. Handle React Router (SPA Fallback)
+  # If the requested filename exists, serve it (images, css, js)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  # Otherwise, serve index.html
+  RewriteRule . /index.html [L]
+</IfModule>
